@@ -7,8 +7,12 @@ import { Navigation } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { IBlogsProps } from 'src/interfaces/blogs.interface';
+import { DATE, MONTHS } from 'src/config/constants';
 
-const Hero = () => {
+const Hero = ({blogs}:IBlogsProps) => {
+    console.log(blogs);
+    
   return (
     <Box component="div" className='hero' style={{backgroundColor: "#070724"}}>
         <Box className="" style={{maxWidth: "1400px", margin: "0 auto"}}>
@@ -24,22 +28,22 @@ const Hero = () => {
                     }}}
                     className="mySwiper"
                 >
-                    {data?.map((item) => (
+                    {blogs.map((item) => (
                     <SwiperSlide
                         key={item.id}
                         className="compatriots-events__slider-list"
                     >
                         <Box component="div" style={{width:"100%", height:"400px", position:"relative"}}>
-                            <Image src={item.image} alt={item.title} fill style={{objectFit: "cover"}}/>
+                            <Image src={item.coverImage.url} alt={item.title} fill style={{objectFit: "cover"}}/>
 
                             <Box style={{position: "absolute", bottom: "20px", left: "40px", color: "#fff"}}>
                                 <Typography variant='h3' component="h3">{item.title}</Typography>
-                                <Typography variant='h5' component="p">{item.exerpt}</Typography>
+                                <Typography variant='h5' component="p">{item.excerpt}</Typography>
                                 <Box style={{display: "flex", alignItems: "center", gap: "30px" }}>
-                                    <Avatar alt={item.author.name} src={item.author.image} />
+                                    <Avatar alt={item.author.name} src={item.author.picture.url} />
                                     <Box>
                                         <Typography component="p">{item.author.name}</Typography>
-                                        <Typography component="b">11 mar 2024 * 1 min red</Typography>
+                                        <Typography component="b">{`${DATE.getDay()} ${ MONTHS[DATE.getMonth()]} ${DATE.getFullYear()}`} * 1 min red</Typography>
                                     </Box>
                                 </Box>
                             </Box>
@@ -55,7 +59,7 @@ const Hero = () => {
 
 export default Hero
 
-const data = [
+export const data = [
 	{
         id: 1,
 		image: 'https://media.graphassets.com/MxJZhmooRRuudoErkQ38',
