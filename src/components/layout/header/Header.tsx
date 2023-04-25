@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <Box sx={{ display: "flex"}} component="header">
+    <Box sx={{ display: "flex", backgroundColor: "rgba(0,0,0, .5)"}} component="header">
       <AppBar component="nav" >
         <Toolbar>
           <IconButton
@@ -40,7 +40,7 @@ const Header = () => {
           <Box sx={{display: { xs: "none", sm: "flex" }, alignItems: "center", gap:"5px",flexGrow: 1, }}>
             <AccountBalanceIcon/>
 
-            <Typography  variant="h6" component="div" sx={{ my: 2, color: "black", fontWeight: "900" }}>
+            <Typography  variant="h6" component="div" sx={{ my: 2, color: "#fff", fontWeight: "900"}}>
               Blog
             </Typography>
           </Box>

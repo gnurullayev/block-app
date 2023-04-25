@@ -19,6 +19,12 @@ export interface IBlogs {
     }
 }
 
+export interface IBlogsCategories {
+    id:string;
+    label:string;
+    slug:string;
+}
+
 export interface IBlogsProps {
     blogs: IBlogs[]
 }

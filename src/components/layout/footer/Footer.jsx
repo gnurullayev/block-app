@@ -5,7 +5,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Footer = () => {
   return (
-    <Box component="footer" style={{ backgroundColor: "#5468ff" }}>
+    <Box component="footer" style={{ backgroundColor: "#1b1d2b" }}>
       <Box className="container" component="div">
         <Box
           sx={{
@@ -16,7 +16,7 @@ const Footer = () => {
           }}
           component="div"
         >
-          <Typography variant="h6" component={"p"}>
+          <Typography sx={{ color: "#fff" }} variant="h6" component={"p"}>
             © {new Date().getFullYear()} Blog sahifa
           </Typography>
 
@@ -25,15 +25,11 @@ const Footer = () => {
             sx={{ display: "flex", alignItems: "center", gap: "20px" }}
           >
             <Box component="li">
-              <TelegramIcon
-                style={{ fontSize: "30px", color: "rgb(0, 30, 60)" }}
-              />
+              <TelegramIcon style={{ fontSize: "30px", color: "green" }} />
             </Box>
 
             <Box component="li">
-              <InstagramIcon
-                style={{ fontSize: "30px", color: "rgb(0, 30, 60)" }}
-              />
+              <InstagramIcon style={{ fontSize: "30px", color: "green" }} />
             </Box>
           </Box>
         </Box>

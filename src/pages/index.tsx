@@ -2,11 +2,11 @@ import { Box} from '@mui/material'
 import Head from 'next/head'
 import { Blog, Content, Hero, Sidebar } from 'src/components'
 import { BlogServices } from "src/services/blog.services"
-import { IBlogs } from "src/interfaces/blogs.interface"
+import { IBlogs, IBlogsCategories} from "src/interfaces/blogs.interface"
 import { GetServerSideProps } from "next"
 
-export default function Home({posts}:IHomeProps) {
-
+export default function Home({posts,lastBlogs,blogsCategories}:IHomeProps) {
+  console.log(blogsCategories);
   return (
     <Box sx={{minHeight: "85vh", pt:"60px"}} component="main">
         <Head>
@@ -18,12 +18,12 @@ export default function Home({posts}:IHomeProps) {
         <Hero blogs={posts}/>
         <Box className="home__intro" sx={{padding: {xs: "20px 0",sm: "40px 0"},} }>
           <Box className="container">
-            <Box sx={{display: {xs: "flex"}, flexDirection: {xs: 'column', md: "row"}, gap: {xs:"20px", md: "40px"},p:"20px 0"}}>
-              <Box sx={{width: {xs: "100%", md: "40%"}, minHeight:"650px", position:"static", top: "100px"}}>
-                <Blog blogs = {posts}/>
+            <Box sx={{display: {xs: "flex"}, flexDirection: {xs: 'column', md: "row"}, gap: {xs:"20px", md: "30px"},p:"20px 0"}}>
+              <Box sx={{width: {xs: "100%", md: "40%"}, height:"800px", position:"sticky", top: "100px"}}>
+                <Blog blogs = {lastBlogs}/>
                 <Sidebar/>
               </Box>
-              <Content/>
+              <Content blogs={posts}/>
             </Box>
           </Box>
         </Box>
@@ -31,15 +31,21 @@ export default function Home({posts}:IHomeProps) {
   )
 }
 interface IHomeProps {
-  posts: IBlogs[]
+  posts: IBlogs[];
+  lastBlogs: IBlogs[]; 
+  blogsCategories: IBlogsCategories[]  
 }
 
 export const getServerSideProps:GetServerSideProps<IHomeProps> = async () => {
   const posts = await BlogServices.getBlogs();
+  const lastBlogs = await BlogServices.latestBlogs();
+  const blogsCategories = await BlogServices.categories();
   
   return {
     props: {
-      posts
+      posts,
+      lastBlogs,
+      blogsCategories
     }
   }
 }

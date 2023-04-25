@@ -11,7 +11,6 @@ import { IBlogsProps } from 'src/interfaces/blogs.interface';
 import { DATE, MONTHS } from 'src/config/constants';
 
 const Hero = ({blogs}:IBlogsProps) => {
-    console.log(blogs);
     
   return (
     <Box component="div" className='hero' style={{backgroundColor: "#070724"}}>
