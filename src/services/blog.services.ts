@@ -70,14 +70,15 @@ export const BlogServices = {
 
   async categories() {
     const query = gql`
-      query categories {
-        categories {
-          id
-          label
-          slug
-        }
+    query categories {
+      categories {
+        id
+        label
+        slug
       }
+    }
     `
+    await request(graphqlApi, query).then(res => console.log(res))  
 
     const result = await request<{categories:IBlogsCategories[]}>(graphqlApi, query)    
     
