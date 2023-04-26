@@ -33,7 +33,7 @@ const Hero = ({blogs}:IBlogsProps) => {
                         className="compatriots-events__slider-list"
                     >
                         <Box component="div" style={{width:"100%", height:"400px", position:"relative"}}>
-                            <Image src={item.coverImage.url} alt={item.title} fill style={{objectFit: "cover"}}/>
+                            <Image src={item.coverImage.url} alt={item.title} fill objectFit='cover'/>
 
                             <Box style={{position: "absolute", bottom: "20px", left: "40px", color: "#fff"}}>
                                 <Typography variant='h3' component="h3">{item.title}</Typography>

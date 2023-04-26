@@ -6,7 +6,6 @@ import { IBlogs, IBlogsCategories} from "src/interfaces/blogs.interface"
 import { GetServerSideProps } from "next"
 
 export default function Home({posts,lastBlogs,blogsCategories}:IHomeProps) {
-  console.log(blogsCategories);
   return (
     <Box sx={{minHeight: "85vh", pt:"60px"}} component="main">
         <Head>
@@ -21,7 +20,7 @@ export default function Home({posts,lastBlogs,blogsCategories}:IHomeProps) {
             <Box sx={{display: {xs: "flex"}, flexDirection: {xs: 'column', md: "row"}, gap: {xs:"20px", md: "30px"},p:"20px 0"}}>
               <Box sx={{width: {xs: "100%", md: "40%"}, height:"800px", position:"sticky", top: "100px"}}>
                 <Blog blogs = {lastBlogs}/>
-                <Sidebar/>
+                <Sidebar blogsCategories={blogsCategories}/>
               </Box>
               <Content blogs={posts}/>
             </Box>
