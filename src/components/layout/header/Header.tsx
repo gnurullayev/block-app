@@ -47,7 +47,9 @@ const Header = () => {
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button key={item.id} sx={{ color: "#fff" }}>
-                {item.label} 
+                <Link href={item.path} style={{color: "#fff", textDecoration: "none"}}>
+                  {item.label} 
+                </Link>
               </Button>
             ))}
           </Box>

@@ -1,5 +1,6 @@
 import { request, gql } from 'graphql-request'
-import { IBlogs, IBlogsCategories } from 'src/interfaces/blogs.interface';
+import { Gwendolyn } from 'next/font/google';
+import { IBlogDetail, IBlogs, IBlogsCategories, ICategoryBlogs } from 'src/interfaces/blogs.interface';
 const graphqlApi = <string>process.env.NEXT_PUBLIC_HYGRAPH_ENDPOIND
 interface IGetBlogs {
   posts: IBlogs[];
@@ -78,10 +79,85 @@ export const BlogServices = {
       }
     }
     `
-    await request(graphqlApi, query).then(res => console.log(res))  
 
     const result = await request<{categories:IBlogsCategories[]}>(graphqlApi, query)    
     
     return result.categories
+  },
+
+  async blogDetail (slug: string) {
+    
+    const query = gql`
+      query blogDetail($slug: String!) {
+        post(where: {slug: $slug}) {
+          date
+          excerpt
+          id
+          slug
+          seo {
+            image {
+              url
+            }
+          }
+          title
+          updatedAt
+          createdAt
+          coverImage {
+            url
+          }
+          content {
+            text
+            html
+          }
+          category {
+            label
+            slug
+          }
+          author {
+            name
+            picture {
+              url
+            }
+          }
+        }
+      }
+    `
+
+    const result = await request<{post:IBlogDetail}>(graphqlApi, query, { slug })   
+    return result.post
+  },
+
+  async getCategoryBlogs (slug:string) {
+    const query = gql`
+    query categoryBlogs($slug:String!) {
+      posts(where: {category: {slug: $slug}}) {
+        id
+        slug
+        title
+        excerpt
+        date
+        createdAt
+        coverImage {
+          url
+        }
+        author {
+          name
+          picture {
+            url
+          }
+        }
+        content {
+          text
+        }
+        category {
+          label
+          slug
+        }
+      }
+    }
+    `
+
+    const result = await request<{posts:IBlogs[]}>(graphqlApi, query, {slug})
+    return result.posts
   }
 }

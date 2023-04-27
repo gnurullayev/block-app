@@ -9,9 +9,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { IBlogsProps } from 'src/interfaces/blogs.interface';
 import { DATE, MONTHS } from 'src/config/constants';
+import { readingTime } from 'src/helpers/calculateEstimatedReading';
+import { useRouter } from 'next/router';
 
 const Hero = ({blogs}:IBlogsProps) => {
-    
+    const router = useRouter()
   return (
     <Box component="div" className='hero' style={{backgroundColor: "#070724"}}>
         <Box className="" style={{maxWidth: "1400px", margin: "0 auto"}}>
@@ -32,7 +34,7 @@ const Hero = ({blogs}:IBlogsProps) => {
                         key={item.id}
                         className="compatriots-events__slider-list"
                     >
-                        <Box component="div" style={{width:"100%", height:"400px", position:"relative"}}>
+                        <Box component="div" style={{width:"100%", height:"400px", position:"relative", cursor:"pointer"}} onClick={() => router.push(`blog/${item.slug}`)}>
                             <Image src={item.coverImage.url} alt={item.title} fill objectFit='cover'/>
 
                             <Box style={{position: "absolute", bottom: "20px", left: "40px", color: "#fff"}}>
@@ -42,7 +44,7 @@ const Hero = ({blogs}:IBlogsProps) => {
                                     <Avatar alt={item.author.name} src={item.author.picture.url} />
                                     <Box>
                                         <Typography component="p">{item.author.name}</Typography>
-                                        <Typography component="b">{`${DATE.getDay()} ${ MONTHS[DATE.getMonth()]} ${DATE.getFullYear()}`} * 1 min red</Typography>
+                                        <Typography component="b">{`${DATE.getDay()} ${ MONTHS[DATE.getMonth()]} ${DATE.getFullYear()}`} * {readingTime(item.content.text)} min red</Typography>
                                     </Box>
                                 </Box>
                             </Box>
