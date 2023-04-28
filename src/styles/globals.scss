@@ -9,9 +9,24 @@ body {
   background-color: #141414 !important;
 }
 
+.MuiPaper-root {
+  background-color: #141414 !important;
+}
+
 .container {
   width: 100%;
   max-width: 1340px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.category-title {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+#nprogress .bar {
+  z-index: 10000 !important;
 }
