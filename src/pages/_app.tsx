@@ -5,7 +5,6 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "src/helpers/theme";
 import createEmotionCache from "src/helpers/createEmotionCatch";
 import { useEffect } from "react";
-import Head from "next/head";
 import "src/styles/globals.scss";
 import { Layout } from "src/components";
 import nProgress from "nprogress";
