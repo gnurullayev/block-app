@@ -15,6 +15,8 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import Link from "next/link";
 import Navbar from "src/components/navbar/Navbar";
 import { NextRouter, useRouter } from "next/router";
+import Logo from "/public/img (1).webp";
+import Image from "next/image";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = React.useState<boolean>(false);
@@ -46,7 +48,7 @@ const Header = () => {
               flexGrow: 1,
             }}
           >
-            <AccountBalanceIcon />
+            <Image src={Logo} alt="Site logo" width={30} height={30} />
 
             <Typography
               variant="h6"
