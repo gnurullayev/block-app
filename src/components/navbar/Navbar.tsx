@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link';
 import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { INavItems, navItems } from 'src/config/constants';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
@@ -30,11 +31,13 @@ const Navbar = (props:ParentCompProps) => {
           <Divider />
           <List>
             {navItems.map((item:INavItems) => (
-              <ListItem key={item.id} disablePadding>
-                <ListItemButton sx={{ textAlign: "center" }}>
-                  <ListItemText primary={item.label} />
-                </ListItemButton>
-              </ListItem>
+                <Link href={item.path} key={item.id} style={{color: "#000", textDecoration: "none"}}>
+                  <ListItem disablePadding>
+                    <ListItemButton sx={{ textAlign: "center" }}>
+                      <ListItemText primary={item.label} />
+                    </ListItemButton>
+                  </ListItem>
+                </Link>
             ))}
           </List>
         </Box>

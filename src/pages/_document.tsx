@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import Document, {
   Html,
   Head,
@@ -6,13 +6,13 @@ import Document, {
   NextScript,
   DocumentProps,
   DocumentContext,
-} from 'next/document';
-import createEmotionServer from '@emotion/server/create-instance';
-import { AppType } from 'next/app';
-import { ServerStyleSheets as JSSServerStyleSheets } from '@mui/styles';
-import { MyAppProps } from './_app';
-import theme from 'src/helpers/theme';
-import createEmotionCache from 'src/helpers/createEmotionCatch';
+} from "next/document";
+import createEmotionServer from "@emotion/server/create-instance";
+import { AppType } from "next/app";
+import { ServerStyleSheets as JSSServerStyleSheets } from "@mui/styles";
+import { MyAppProps } from "./_app";
+import theme from "src/helpers/theme";
+import createEmotionCache from "src/helpers/createEmotionCatch";
 
 interface MyDocumentProps extends DocumentProps {
   emotionStyleTags: JSX.Element[];
@@ -24,7 +24,6 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
       <Head>
         {/* PWA primary color */}
         <meta name="theme-color" content={theme.palette.primary.main} />
-        <link rel="shortcut icon" href="/favicon.ico" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -49,11 +48,11 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
 // It's using .browserslistrc
 let prefixer: any;
 let cleanCSS: any;
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   /* eslint-disable global-require */
-  const postcss = require('postcss');
-  const autoprefixer = require('autoprefixer');
-  const CleanCSS = require('clean-css');
+  const postcss = require("postcss");
+  const autoprefixer = require("autoprefixer");
+  const CleanCSS = require("clean-css");
   /* eslint-enable global-require */
 
   prefixer = postcss([autoprefixer]);
@@ -95,7 +94,9 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>) =>
+      enhanceApp: (
+        App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>
+      ) =>
         function EnhanceApp(props) {
           return jssSheets.collect(<App emotionCache={cache} {...props} />);
         },
@@ -109,7 +110,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style
-      data-emotion={`${style.key} ${style.ids.join(' ')}`}
+      data-emotion={`${style.key} ${style.ids.join(" ")}`}
       key={style.key}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: style.css }}
@@ -119,7 +120,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   // Generate the css string for the styles coming from jss
   let css = jssSheets.toString();
   // It might be undefined, e.g. after an error.
-  if (css && process.env.NODE_ENV === 'production') {
+  if (css && process.env.NODE_ENV === "production") {
     const result1 = await prefixer.process(css, { from: undefined });
     css = result1.css;
     css = cleanCSS.minify(css).styles;
